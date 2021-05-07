@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-multi-comp */
 
-import { createMedia } from '@artsy/fresnel'
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import { createMedia } from '@artsy/fresnel';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
   Button,
   Container,
@@ -17,7 +17,7 @@ import {
   Segment,
   Sidebar,
   Visibility,
-} from 'semantic-ui-react'
+} from 'semantic-ui-react';
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -25,17 +25,18 @@ const { MediaContextProvider, Media } = createMedia({
     tablet: 768,
     computer: 1024,
   },
-})
+});
 
 /* Heads up!
  * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
  * components for such things.
  */
 const HomepageHeading = ({ mobile }) => (
-  <Container text>
+  <Container id="home-heading" style text>
     <Header
-      as='h1'
-      content='Imagine-a-Company'
+    
+      as="h1"
+      content="The Wedding of Estefany And Carl"
       inverted
       style={{
         fontSize: mobile ? '2em' : '4em',
@@ -45,8 +46,8 @@ const HomepageHeading = ({ mobile }) => (
       }}
     />
     <Header
-      as='h2'
-      content='Do whatever you want when you want to.'
+      as="h2"
+      content="June 5th, 2021"
       inverted
       style={{
         fontSize: mobile ? '1.5em' : '1.7em',
@@ -54,89 +55,83 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? '0.5em' : '1.5em',
       }}
     />
-    <Button primary size='huge'>
-      Get Started
-      <Icon name='right arrow' />
+    <Button
+      href="https://www.zola.com/registry/carlandestefany"
+      primary
+      size="huge">
+      Wedding Registry
+      <Icon name="right arrow" />
     </Button>
   </Container>
-)
+);
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
-}
+};
 
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
 class DesktopContainer extends Component {
-  state = {}
+  state = {};
 
-  hideFixedMenu = () => this.setState({ fixed: false })
-  showFixedMenu = () => this.setState({ fixed: true })
+  hideFixedMenu = () => this.setState({ fixed: false });
+  showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { children } = this.props
-    const { fixed } = this.state
+    const { children } = this.props;
+    const { fixed } = this.state;
 
     return (
-      <Media greaterThan='mobile'>
+      <Media greaterThan="mobile">
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
+          onBottomPassedReverse={this.hideFixedMenu}>
           <Segment
             inverted
-            textAlign='center'
+            textAlign="center"
             style={{ minHeight: 700, padding: '1em 0em' }}
-            vertical
-          >
+            vertical>
             <Menu
               fixed={fixed ? 'top' : null}
               inverted={!fixed}
               pointing={!fixed}
               secondary={!fixed}
-              size='large'
-            >
-              
-            </Menu>
+              size="large"></Menu>
             <HomepageHeading />
           </Segment>
         </Visibility>
 
         {children}
       </Media>
-    )
+    );
   }
 }
 
 DesktopContainer.propTypes = {
   children: PropTypes.node,
-}
+};
 
 class MobileContainer extends Component {
-  state = {}
+  state = {};
 
-  handleSidebarHide = () => this.setState({ sidebarOpened: false })
+  handleSidebarHide = () => this.setState({ sidebarOpened: false });
 
-  handleToggle = () => this.setState({ sidebarOpened: true })
+  handleToggle = () => this.setState({ sidebarOpened: true });
 
   render() {
-    const { children } = this.props
-    const { sidebarOpened } = this.state
+    const { children } = this.props;
+    const { sidebarOpened } = this.state;
 
-    return (
-      <Media as={Sidebar.Pushable} at='mobile'>
-        
-      </Media>
-    )
+    return <Media as={Sidebar.Pushable} at="mobile"></Media>;
   }
 }
 
 MobileContainer.propTypes = {
   children: PropTypes.node,
-}
+};
 
 const ResponsiveContainer = ({ children }) => (
   /* Heads up!
@@ -147,60 +142,68 @@ const ResponsiveContainer = ({ children }) => (
     <DesktopContainer>{children}</DesktopContainer>
     <MobileContainer>{children}</MobileContainer>
   </MediaContextProvider>
-)
+);
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node,
-}
+};
 
 const HomepageLayout = () => (
   <ResponsiveContainer>
     <Segment style={{ padding: '8em 0em' }} vertical>
-      <Grid container stackable verticalAlign='middle'>
+      <Grid container stackable verticalAlign="middle">
         <Grid.Row>
           <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <Header as="h3" style={{ fontSize: '2em' }}>
               We Help Companies and Companions
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+              We can give your company superpowers to do things that they never
+              thought possible. Let us delight your customers and empower your
+              needs... through pure data analytics.
             </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <Header as="h3" style={{ fontSize: '2em' }}>
               We Make Bananas That Can Dance
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+              Yes that's right, you thought it was the stuff of dreams, but even
+              bananas can be bioengineered.
             </p>
           </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+          <Grid.Column floated="right" width={6}>
+            <Image
+              bordered
+              rounded
+              size="large"
+              src="/images/wireframe/white-image.png"
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column textAlign='center'>
-            <Button size='huge'>Check Them Out</Button>
+          <Grid.Column textAlign="center">
+            <Button size="huge">Check Them Out</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Segment>
 
     <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
+      <Grid celled="internally" columns="equal" stackable>
+        <Grid.Row textAlign="center">
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <Header as="h3" style={{ fontSize: '2em' }}>
               "What a Company"
             </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
+            <p style={{ fontSize: '1.33em' }}>
+              That is what they all say about us
+            </p>
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <Header as="h3" style={{ fontSize: '2em' }}>
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
+              <Image avatar src="/images/avatar/large/nan.jpg" />
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>
@@ -210,43 +213,41 @@ const HomepageLayout = () => (
 
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Container text>
-        <Header as='h3' style={{ fontSize: '2em' }}>
+        <Header as="h3" style={{ fontSize: '2em' }}>
           Breaking The Grid, Grabs Your Attention
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
+          Instead of focusing on content creation and hard work, we have learned
+          how to master the art of doing nothing by providing massive amounts of
+          whitespace and generic content that can seem massive, monolithic and
+          worth your attention.
         </p>
-        <Button as='a' size='large'>
+        <Button as="a" size="large">
           Read More
         </Button>
 
         <Divider
-          as='h4'
-          className='header'
+          as="h4"
+          className="header"
           horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#'>Case Studies</a>
+          style={{ margin: '3em 0em', textTransform: 'uppercase' }}>
+          <a href="#">Case Studies</a>
         </Divider>
 
-        <Header as='h3' style={{ fontSize: '2em' }}>
+        <Header as="h3" style={{ fontSize: '2em' }}>
           Did We Tell You About Our Bananas?
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
+          Yes I know you probably disregarded the earlier boasts as non-sequitur
+          filler content, but it's really true. It took years of gene splicing
+          and combinatory DNA research, but our bananas can really dance.
         </p>
-        <Button as='a' size='large'>
+        <Button as="a" size="large">
           I'm Still Quite Interested
         </Button>
       </Container>
     </Segment>
-
-    
   </ResponsiveContainer>
-)
+);
 
-export default HomepageLayout
+export default HomepageLayout;
