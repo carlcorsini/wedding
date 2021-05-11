@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.home-heading {
+  background-image: url('https://github.com/carlcorsini/wedding/blob/main/src/pics/estefcarl.JPG?raw=true') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+}
+
+.opaque {
+  background-color:rgba(0, 0, 0, 0.5);
+}
