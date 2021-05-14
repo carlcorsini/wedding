@@ -4,6 +4,7 @@
 import { createMedia } from '@artsy/fresnel';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+
 import {
   Button,
   Container,
@@ -17,8 +18,8 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Modal,
 } from 'semantic-ui-react';
-
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
     mobile: 0,
@@ -78,10 +79,12 @@ HomepageHeading.propTypes = {
  * It can be more complicated, but you can create really flexible markup.
  */
 class DesktopContainer extends Component {
-  state = {};
+  state = { open: true };
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
+  // const [open, setOpen] = React.useState(true);
+  setOpen = () => this.setState({ open: false });
 
   render() {
     const { children } = this.props;
@@ -89,6 +92,44 @@ class DesktopContainer extends Component {
 
     return (
       <Media greaterThan="mobile">
+        <Modal
+          defaultOpen={true}
+          basic
+          onClose={() => this.setOpen(false)}
+          onOpen={() => this.setOpen(true)}
+          open={this.state.open}
+          size="small">
+          <Header size="huge" icon>
+            <Icon name="attention" />
+            Statement on COVID-19
+          </Header>
+          <Modal.Content>
+            <p style={{ fontSize: '1.3em' }}>
+              The health and safety of our wonderful guests is our top priority
+              at our wedding. Due to health and safety concerns with regards to
+              the <em>COVID-19 Pandemic</em> we want to be clear about our social
+              distancing & mask wearing policy.
+            </p>
+            <p style={{ fontSize: '1.5em' }}>
+              We are requiring all guests to wear masks and present a negative
+              COVID-19 test UNLESS we receive proof of vaccination and a 2-week
+              period since your last shot.
+            </p>
+            <p style={{ fontSize: '1.3em' }}>
+              We understand our guests right to their privacy and request if you
+              would not like to present your vaccine information, you wear a mask and
+              practice social distancing when not eating or drinking at our
+              wedding. Please be mindful of the safety of your fellow friends
+              and family. You wouldn't be invited to the wedding if we didn't love you. It is our
+              responsibility to keep our guests and their families safe and happy!
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" inverted onClick={() => this.setOpen(false)}>
+              <Icon name="checkmark" /> I have read the COVID-19 policy
+            </Button>
+          </Modal.Actions>
+        </Modal>
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
@@ -134,8 +175,8 @@ class DesktopContainer extends Component {
                       inverted={!fixed}
                       primary={fixed}
                       style={{ marginLeft: '0.5em' }}>
-                        <Icon name="microsoft"/>
-                    Join Live Meeting
+                      <Icon name="microsoft" />
+                      Join Live Meeting
                     </Button>
                   </Menu.Item>
                 </Container>
@@ -156,18 +197,56 @@ DesktopContainer.propTypes = {
 };
 
 class MobileContainer extends Component {
-  state = {};
+  state = { open: true };
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false });
 
   handleToggle = () => this.setState({ sidebarOpened: true });
-
+  setOpen = () => this.setState({ open: false });
   render() {
     const { children } = this.props;
     const { sidebarOpened } = this.state;
 
     return (
       <Media as={Sidebar.Pushable} at="mobile">
+          <Modal
+          defaultOpen={true}
+          basic
+          onClose={() => this.setOpen(false)}
+          onOpen={() => this.setOpen(true)}
+          open={this.state.open}
+          size="small">
+          <Header size="huge" icon>
+            <Icon name="attention" />
+            Statement on COVID-19
+          </Header>
+          <Modal.Content>
+            <p style={{ fontSize: '1.3em' }}>
+              The health and safety of our wonderful guests is our top priority
+              at our wedding. Due to health and safety concerns with regards to
+              the <em>COVID-19 Pandemic</em> we want to be clear about our social
+              distancing & mask wearing policy.
+            </p>
+            <p style={{ fontSize: '1.5em' }}>
+              We are requiring all guests to wear masks and present a negative
+              COVID-19 test UNLESS we receive proof of vaccination and a 2-week
+              period since your last shot.
+            </p>
+            <p style={{ fontSize: '1.3em' }}>
+              We understand our guests right to their privacy and request if you
+              would not like to present your vaccine information, you wear a mask and
+              practice social distancing when not eating or drinking at our
+              wedding. Please be mindful of the safety of your fellow friends
+              and family. You wouldn't be invited to the wedding if we didn't love you. It is our
+              responsibility to keep our guests and their families safe and happy!
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" inverted onClick={() => this.setOpen(false)}>
+              <Icon name="checkmark" /> I have read the COVID-19 policy
+            </Button>
+          </Modal.Actions>
+        </Modal>
         <Sidebar.Pushable>
           <Sidebar
             as={Menu}
@@ -188,8 +267,8 @@ class MobileContainer extends Component {
               href="https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3A5270f9355e0849bdbac75b2b7971e74a%40thread.tacv2%2F1620184307481%3Fcontext%3D%257b%2522Tid%2522%253a%2522a56162b0-44e1-44ff-b810-b703aa81c222%2522%252c%2522Oid%2522%253a%2522cfed5b4a-cf8f-4d16-8227-7855007877e6%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=c9c842e9-ca5b-48b9-89a2-3f5405d2c298&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true"
               target="_blank"
               as="a">
-                <Icon name="microsoft"/>
-            Join Live Meeting
+              <Icon name="microsoft" />
+              Join Live Meeting
             </Menu.Item>
           </Sidebar>
 
@@ -205,7 +284,7 @@ class MobileContainer extends Component {
                   <Menu.Item onClick={this.handleToggle}>
                     <Icon name="sidebar" />
                   </Menu.Item>
-                  <Menu.Item >
+                  <Menu.Item>
                     <Button
                       href="https://www.zola.com/registry/carlandestefany"
                       target="_blank"
